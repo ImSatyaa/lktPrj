@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.mac.testdemo.base.BaseActivity
 import com.mac.testdemo.R
+import com.mac.testdemo.base.BaseActivity
 import com.mac.testdemo.base.MyApplicationClass
 import com.mac.testdemo.databinding.ActivityLoginBinding
 import com.mac.testdemo.viewmodel.LoginViewModel
@@ -59,6 +59,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }else {
                 startActivity(Intent(this,RetailerDashboard::class.java))
             }
+
 
         })
 
