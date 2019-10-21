@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        tools:context=".view.RetailerHome"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="@dimen/_100sdp"
+                android:text="View\nProducts"
+                android:id="@+id/tv_viewProduct"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="@dimen/_100sdp"
+                android:text="View\nDistribution"
+                android:id="@+id/tv_viewDis"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_20sdp"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="@dimen/_100sdp"
+                android:text="Add\nSales"
+                android:id="@+id/tv_viewAddSales"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="@dimen/_20sdp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="@dimen/_100sdp"
+                android:text="Sales\nReport"
+                android:id="@+id/tv_salesReport"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/_20sdp"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="@dimen/_100sdp"
+                android:text="View\nProfile"
+                android:id="@+id/tv_viewProfile"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp"
+                android:layout_weight="2" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

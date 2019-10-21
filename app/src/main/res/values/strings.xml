@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TestDemo</string>
+    <string name="login">Login</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="e_mail">E-mail</string>
+    <string name="register">Register</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_contact_person">Enter Contact Person</string>
+    <string name="enter_mobile_no">Enter Mobile No.</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_city">Enter City</string>
+    <string name="enter_pin_code">Enter Pin Code</string>
+    <string name="enter_gst_no">Enter GST No.</string>
+    <string name="enter_pan_no">Enter PAN No.</string>
+    <string name="enter_business_category">Enter Business Category</string>
+    <string name="don_t_have_an_account_register_now">Don\'t have an Account? <font fgcolor='#FFFF3B30'>Register Now</font></string>
+    <string name="retailer">Retailer</string>
+    <string name="customer">Customer</string>
+</resources>
