@@ -53,7 +53,6 @@ public class DistributionList extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Products>call, Throwable t) {
-                // Log error here since request failed
             }
         });
 
