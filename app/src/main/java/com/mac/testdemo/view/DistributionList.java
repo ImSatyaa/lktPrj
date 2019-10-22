@@ -29,8 +29,6 @@ public class DistributionList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listBinding = DataBindingUtil.setContentView(this,R.layout.activity_distribution_list);
-
-
         WebService apiService =
                 ApiClient.getClient().create(WebService.class);
 
