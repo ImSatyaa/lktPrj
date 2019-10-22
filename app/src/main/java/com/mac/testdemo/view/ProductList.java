@@ -1,10 +1,11 @@
 package com.mac.testdemo.view;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.os.Bundle;
 
 import com.mac.testdemo.R;
 import com.mac.testdemo.databinding.ActivityProductListBinding;
@@ -48,6 +49,7 @@ public class ProductList extends AppCompatActivity {
             @Override
             public void onFailure(Call<Products>call, Throwable t) {
                 // Log error here since request failed
+                Log.d("======", "onFailure: " + t.getMessage());
             }
         });
     }

@@ -9,19 +9,16 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.mac.testdemo.R
 import com.mac.testdemo.model.Category
+import com.mac.testdemo.model.CityModel
+import com.mac.testdemo.model.RegisterCustRequestModel
 import com.mac.testdemo.model.RegisterRequestModel
 import com.mac.testdemo.network.Repository
 import com.mac.testdemo.utils.UtilsMethod
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import android.widget.RadioGroup
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import com.mac.testdemo.R
-import com.mac.testdemo.model.CityModel
-import kotlinx.android.synthetic.main.activity_register.view.*
-import org.w3c.dom.Node
 
 
 class RegisterViewModel(private val repository: Repository) : ViewModel() {
@@ -47,11 +44,13 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
     var progressDialog: MutableLiveData<Boolean>? = null
 
     var registerRequestModel: RegisterRequestModel = RegisterRequestModel()
+    var registerCustRequestModel: RegisterCustRequestModel = RegisterCustRequestModel()
 
     var compositeDisposable = CompositeDisposable()
 
     var businessCategoryList: MutableLiveData<List<Category>> = MutableLiveData()
     var cityModelList: MutableLiveData<List<CityModel>> = MutableLiveData()
+    var respo: MutableLiveData<String> = MutableLiveData()
 
     var position: Int = 0
 
@@ -81,84 +80,98 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
 
     fun onEmailChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.email = (s.toString())
+        registerCustRequestModel.email = (s.toString())
         regClick?.set(isAllInputValid())
     }
 
 
     fun onNameChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.name = s.toString()
+        registerCustRequestModel.name = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onContactPersonChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.contact_p = s.toString()
+        registerCustRequestModel.contact_p = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onPassChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.password = s.toString()
+        registerCustRequestModel.password = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onAddressChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.address = s.toString()
+        registerCustRequestModel.address = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onMobileChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.phone = s.toString()
+        registerCustRequestModel.phone = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onCityChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.c_id = "1"
+        registerCustRequestModel.c_id = "1"
         regClick?.set(isAllInputValid())
     }
 
 
     fun onPinChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.pin = s.toString()
+        registerCustRequestModel.pin = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onGstChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.gst = s.toString()
+        registerCustRequestModel.gst = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onPanChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.pan = s.toString()
+        registerCustRequestModel.pan = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onTinChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.tin = s.toString()
+        registerCustRequestModel.tin = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onBusinessChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.business_cat = s.toString()
+        registerCustRequestModel.business_cat = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onCompanyChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.company = s.toString()
+        registerCustRequestModel.company = s.toString()
         regClick?.set(isAllInputValid())
     }
 
 
     fun onCompanyGrpChangeListener(s: CharSequence, i: Int, j: Int, k: Int) {
         registerRequestModel.company_group = s.toString()
+        registerCustRequestModel.company_group = s.toString()
         regClick?.set(isAllInputValid())
     }
 
@@ -167,7 +180,7 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
         return UtilsMethod.isEmailValid(email?.get().toString()) &&
                 name?.get().toString().length > 3 &&
                 password?.get().toString().length > 5 &&
-                contactPerson?.get().toString().length > 5 &&
+                contactPerson?.get().toString().length > 2 &&
                 address?.get().toString().length > 1 &&
                 mobile?.get().toString().length > 1 &&
                 pin?.get().toString().length > 1 &&
@@ -187,14 +200,17 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
             businessCategoryList.value?.get(position)?.bus_cat_id.toString()
         if (isSubmit) {
             registerRequestModel.add_retailer = "1"
+            registerCustRequestModel.add_customer = "1"
         } else {
             registerRequestModel.add_retailer = null
+            registerCustRequestModel.add_customer = null
         }
 
         if (radio_checked.value == R.id.rb_customer) {
-            if (isAllInputValid())             registerRequestModel.add_retailer = "1"
+            if (isAllInputValid()) registerCustRequestModel.add_customer = "1"
 
-            compositeDisposable.addAll(repository.executeRegisterC(registerRequestModel)
+            compositeDisposable.addAll(
+                repository.executeRegisterC(registerCustRequestModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { s -> progressDialog?.value = true }
@@ -244,13 +260,11 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
                 ).toList()
 
 
-                cityModelList.value = list;
+                cityModelList.value = list
             }
 
 
-
-
-        }else {
+        } else {
             var listCat: List<Category>? = null
 
             if (jsonObject.get("status").asInt == 304) {
@@ -258,7 +272,9 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
                     jsonObject.getAsJsonArray("category"),
                     Array<Category>::class.java
                 ).toList()
-            } else {
+            } else if (jsonObject.get("status").asInt == 200) {
+
+                respo.value = "success"
 
             }
             //1= admin 2=retailer 3= customer

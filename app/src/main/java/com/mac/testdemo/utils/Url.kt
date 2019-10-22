@@ -8,7 +8,7 @@ class Url {
         const val REGISTER_C = "add-customer"
         const val REGISTER_R = "add-retailer"
         const val UPDATE_USER = "update-customer"
-        const val LIST_PRODUCT = "list-product"
+        const val LIST_PRODUCT = "list-products"
         const val UPDATE_PRODUCT = "update-product"
         const val ADD_PRODUCT = "add-product"
         const val LIST_CITY = "list-city"

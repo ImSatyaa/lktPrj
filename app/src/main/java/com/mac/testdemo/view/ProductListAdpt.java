@@ -1,7 +1,6 @@
 package com.mac.testdemo.view;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -31,7 +30,7 @@ public class ProductListAdpt extends RecyclerView.Adapter<ProductListAdpt.VeHold
 
     @Override
     public void onBindViewHolder(@NonNull VeHold holder, int position) {
-
+        holder.itemProductBinding.setData(datumList.get(position));
     }
 
     @Override
@@ -40,8 +39,10 @@ public class ProductListAdpt extends RecyclerView.Adapter<ProductListAdpt.VeHold
     }
 
     public class VeHold extends RecyclerView.ViewHolder {
+        ItemProductBinding itemProductBinding;
         public VeHold(@NonNull ItemProductBinding itemView) {
             super(itemView.getRoot());
+            this.itemProductBinding = itemView;
         }
     }
 }

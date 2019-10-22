@@ -26,6 +26,7 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
     var compositeDisposable = CompositeDisposable()
     var onRegisterClick = SingleLiveData<Boolean>()
     var role = MutableLiveData<Int>()
+    var id = MutableLiveData<Int>()
 
     init {
         btnSelected = ObservableBoolean(false)
@@ -34,7 +35,7 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
         password = ObservableField("")
         userLogin = LoginRequestModel("","")
         onRegisterClick.value = false
-        role = MutableLiveData(1);
+        role = MutableLiveData(0)
     }
 
     fun onEmailChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -71,9 +72,13 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
     private fun onResponse(call: JsonElement) {
         progressDialog?.value = false
 
+        //{"return_data":{"status":200,"msg":"Ok","Userdata":{"uid":235320,"role_id":2}}}
+
         val json = call as JsonObject
-        if (json.has("status_data") && json.get("return_data").asJsonObject.get("status").asInt ==200 ){
+        if (json.has("return_data") && json.get("return_data").asJsonObject.get("status").asInt == 200) {
             role.value = json.get("return_data").asJsonObject.get("Userdata").asJsonObject.get("role_id").asInt
+            id.value =
+                json.get("return_data").asJsonObject.get("Userdata").asJsonObject.get("uid").asInt
         }
 
 

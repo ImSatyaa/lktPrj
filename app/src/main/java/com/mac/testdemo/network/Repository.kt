@@ -2,6 +2,7 @@ package com.mac.testdemo.network
 
 import com.google.gson.JsonElement
 import com.mac.testdemo.model.LoginRequestModel
+import com.mac.testdemo.model.RegisterCustRequestModel
 import com.mac.testdemo.model.RegisterRequestModel
 import io.reactivex.Observable
 
@@ -19,7 +20,7 @@ class Repository(private val apiCallInterface: WebService) {
         return apiCallInterface.register(registerRequestModel)
     }
 
-    fun executeRegisterC(registerRequestModel: RegisterRequestModel): Observable<JsonElement> {
+    fun executeRegisterC(registerRequestModel: RegisterCustRequestModel): Observable<JsonElement> {
         return apiCallInterface.registerCustomer(registerRequestModel)
     }
 

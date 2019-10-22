@@ -9,6 +9,7 @@ import com.mac.testdemo.R
 import com.mac.testdemo.base.BaseActivity
 import com.mac.testdemo.base.MyApplicationClass
 import com.mac.testdemo.databinding.ActivityLoginBinding
+import com.mac.testdemo.storage.UserSessionManager
 import com.mac.testdemo.viewmodel.LoginViewModel
 import com.mac.testdemo.viewmodel.ViewModelFactory
 import mvvm.f4wzy.com.samplelogin.util.CustomeProgressDialog
@@ -27,6 +28,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
 
     lateinit var activityViewModel: LoginViewModel
+    var sessionManager: UserSessionManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +40,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         customeProgressDialog = CustomeProgressDialog(this)
 
+        sessionManager = UserSessionManager.getsharedprefInstance(this)
         observer()
 
     }
@@ -56,11 +59,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             if (role == 1) {
                 Toast.makeText(this, "User name or password do not match ", Toast.LENGTH_LONG)
                     .show()
-            }else {
-                startActivity(Intent(this,RetailerDashboard::class.java))
+            } else if (role == 2) {
+                startActivity(Intent(this, RetailerHome::class.java))
+            } else if (role == 3) {
+                startActivity(Intent(this, CustomerDashboard::class.java))
             }
 
+        })
 
+        activityViewModel.id.observe(this, Observer { id ->
+            sessionManager?.tokenID = id.toString()
         })
 
 

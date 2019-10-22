@@ -1,7 +1,9 @@
 package com.mac.testdemo.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.mac.testdemo.R
@@ -57,8 +59,17 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
             dataBinding.autoCompleteCity.setAdapter(adapter)
         })
 
-        
 
+
+        viewModel.respo.observe(this, Observer {
+
+                s ->
+            if (s.equals("success", true)) {
+                Toast.makeText(this, "You have been successfully register", Toast.LENGTH_LONG)
+                    .show()
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+        })
 
     }
 
